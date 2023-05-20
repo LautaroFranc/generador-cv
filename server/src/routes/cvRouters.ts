@@ -5,7 +5,6 @@ const oRouter = Router();
 
 
 const Controllers = new UserController();
-
 oRouter.post('/extract',upload.single("file") , (oRequest: Request, oResponse: Response) => {
   Controllers.FormCv(oRequest, oResponse);
 });
