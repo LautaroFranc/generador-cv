@@ -1,3 +1,4 @@
+import { Request, Response } from 'express';
 import Controller from "./Controller";
 export default class UserController extends Controller {
     handleError(oResponse: Response, oException: unknown): void;
@@ -9,5 +10,6 @@ export default class UserController extends Controller {
      * @param {Response} oResponse Este objeto maneja el response de la solicitud
      *
      */
+    generatorAbout: (oRequest: Request, oResponse: Response) => Promise<void>;
     FormCv: (oRequest: Request, oResponse: Response) => Promise<void>;
 }

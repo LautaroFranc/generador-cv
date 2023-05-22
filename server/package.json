@@ -4,7 +4,9 @@
   "description": "Api create cv ",
   "main": "index.ts",
   "scripts": {
-    "start": "nodemon index.ts"
+    "start": "nodemon index.ts",
+    "build":"tsc",
+    "vercel-build":"echo deploy"
   },
   "repository": {
     "type": "git",
