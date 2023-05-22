@@ -27,7 +27,7 @@ var Controller = class Controller {
     if (DEBUG && oException !== null)
      // @ts-ignore: <error-code>
       oData['debug'] = oException;
-      oResponse.json(oData);
+      oResponse.send(oData);
   }
 
 

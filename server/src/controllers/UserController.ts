@@ -78,6 +78,7 @@ export default class UserController extends Controller {
     
     oResponse.setHeader('Content-Disposition', 'attachment; filename=My Document.docx');
     const buff = Buffer.from(b64string, 'base64');
+    
       return this.respond(oResponse, DONE,  buff);
     } catch (oException) {
       return this.handleError(oResponse, oException);
