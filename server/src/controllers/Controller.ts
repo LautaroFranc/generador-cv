@@ -7,7 +7,7 @@ var Controller = class Controller {
 
   constructor() { }
 
-  respond = (oResponse: Response, nStatusCode: number, oData: {message: string}|null = null, oException: string | object |null= null) => {
+  respond = (oResponse: Response, nStatusCode: number, oData: any|null = null, oException: string | object |null= null) => {
     oResponse.status(nStatusCode);
     if (oData == null)
       switch (nStatusCode) {

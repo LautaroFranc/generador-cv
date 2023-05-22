@@ -1,13 +1,37 @@
 import { DONE, CONFLICT, NOT_VALID, NOT_FOUND } from "../constants/StatusCode";
 import { Request, Response } from 'express';
-
 import Controller from "./Controller";
-import PizZip from "pizzip";
-import Docxtemplater from "docxtemplater";
-import { readFileSync, writeFileSync } from "fs";
-import { resolve } from "path";
 import { iABardPrompt } from "../util/iABard";
-import fs from 'fs';
+import { Packer } from "docx";
+import { DocumentCreator } from "../template/createCv";
+
+const data = {
+  "skills": [
+      {
+          "name": "JavaScript"
+      }
+  ],
+  "db": [
+      {
+          "name": "MySQL"
+      }
+  ],
+  "tools": [],
+  "languages": [],
+  "infoUser": {
+      "about": "",
+      "name": "lautaro Franco",
+      "stack": "ssdsd",
+      "phoneNumber": "03735418346",
+      "profileUrl": "",
+      "email": "hola12lf@gmail.com",
+      "Address": "avenida del trabajor"
+  },
+  "experiences": [],
+  "educations": [],
+  "projects": []
+}
+
 export default class UserController extends Controller {
   handleError(oResponse: Response, oException: unknown) {
     throw new Error("Method not implemented.");
@@ -45,26 +69,17 @@ export default class UserController extends Controller {
 
   FormCv = async (oRequest: Request, oResponse: Response) => {
     try {
-      const data: any = oRequest.body;
-      const content = readFileSync(
-        resolve(__dirname, "../template/CV-Template.docx"),
-        "binary"
-      );
-      const zip = new PizZip(content);
-      const doc = new Docxtemplater(zip, { paragraphLoop: true });
-      doc.setData(data);
-      doc.render();
-      const buf = doc.getZip().generate({
-        type: "nodebuffer",
-      });
-      const fileUrl = `${oRequest.protocol}://${oRequest.get("host")}/public/output.docx`;
+
+      const {experiences, educations, skills, languages, infoUser, projects, tools, db} = data;
+      const documentCreator = new DocumentCreator();
+      const doc = documentCreator.create([experiences, educations, skills, languages, infoUser, projects, tools, db]);
+      const b64string = await Packer.toBase64String(doc);
     
-      return this.respond(oResponse, DONE, {
-        message: "success",
-        data: fileUrl,
-      } as any);
+    
+    oResponse.setHeader('Content-Disposition', 'attachment; filename=My Document.docx');
+    const buff = Buffer.from(b64string, 'base64');
+      return this.respond(oResponse, DONE,  buff);
     } catch (oException) {
-      console.log(oException);
       return this.handleError(oResponse, oException);
     }
   };
