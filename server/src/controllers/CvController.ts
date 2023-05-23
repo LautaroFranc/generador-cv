@@ -5,32 +5,6 @@ import { iABardPrompt } from "../util/iABard";
 import { Packer } from "docx";
 import { DocumentCreator } from "../template/createCv";
 
-const data = {
-  "skills": [
-      {
-          "name": "JavaScript"
-      }
-  ],
-  "db": [
-      {
-          "name": "MySQL"
-      }
-  ],
-  "tools": [],
-  "languages": [],
-  "infoUser": {
-      "about": "",
-      "name": "lautaro Franco",
-      "stack": "ssdsd",
-      "phoneNumber": "03735418346",
-      "profileUrl": "",
-      "email": "hola12lf@gmail.com",
-      "Address": "avenida del trabajor"
-  },
-  "experiences": [],
-  "educations": [],
-  "projects": []
-}
 
 export default class UserController extends Controller {
   handleError(oResponse: Response, oException: unknown) {
@@ -70,16 +44,16 @@ export default class UserController extends Controller {
   FormCv = async (oRequest: Request, oResponse: Response) => {
     try {
 
-      const {experiences, educations, skills, languages, infoUser, projects, tools, db} = data;
+      const {experiences, educations, skills, languages, infoUser, projects, tools, db} =oRequest.body ;
       const documentCreator = new DocumentCreator();
       const doc = documentCreator.create([experiences, educations, skills, languages, infoUser, projects, tools, db]);
       const b64string = await Packer.toBase64String(doc);
     
     
-    oResponse.setHeader('Content-Disposition', 'attachment; filename=My Document.docx');
+    oResponse.setHeader('Content-Disposition', 'attachment; filename=My_cv.docx');
     const buff = Buffer.from(b64string, 'base64');
-    
-      return this.respond(oResponse, DONE,  buff);
+    return this.respond(oResponse, DONE,  buff);
+
     } catch (oException) {
       return this.handleError(oResponse, oException);
     }
