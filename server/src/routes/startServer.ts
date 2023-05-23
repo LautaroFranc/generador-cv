@@ -6,7 +6,8 @@ oRouter.get('/',(oRequest: Request, oResponse: Response) => {
     message: 'Success',
     routers:[
       '☁️/generatorAbout > post',
-      '☁️/generateCV > post'
+      '☁️/generateCV > post',
+      '☁️/viewCV > get'
       ]
   })
 });

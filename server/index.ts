@@ -7,6 +7,7 @@ import pkg from 'body-parser';
 import oRoutes from './src/routes/Routes';
 import path from 'path';
 const { json } = pkg;
+import "./src/db"
 
 // use the modules
 app.use(cors({ origin: '*', methods: ['GET', 'POST', 'DELETE'], allowedHeaders: ['Content-Type', 'authorization'] }));

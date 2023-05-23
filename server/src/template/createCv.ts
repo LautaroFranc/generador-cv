@@ -12,7 +12,7 @@ import { Project, infoUser, education, experiences, formCv } from "../interface/
 export class DocumentCreator {
   //tslint:disable-next-line:typedef
   public create([experiences, educations, skills, languages, infoUser, projects, tools, db]:any): Document {
-    console.log({projects});
+    console.log({infoUser});
     
     const document = new Document({
       sections: [
