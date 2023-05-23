@@ -5,7 +5,7 @@ const oRouter = Router();
 
 
 const Controllers = new UserController();
-oRouter.post('/generateCv', (oRequest: Request, oResponse: Response) => {
+oRouter.get('/generateCv', (oRequest: Request, oResponse: Response) => {
   Controllers.FormCv(oRequest, oResponse);
 });
 

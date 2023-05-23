@@ -43,13 +43,11 @@ export default class UserController extends Controller {
 
   FormCv = async (oRequest: Request, oResponse: Response) => {
     try {
-
-      const {experiences, educations, skills, languages, infoUser, projects, tools, db} =oRequest.body ;
-      const documentCreator = new DocumentCreator();
-      const doc = documentCreator.create([experiences, educations, skills, languages, infoUser, projects, tools, db]);
-      const b64string = await Packer.toBase64String(doc);
-    
-    
+    const {experiences, educations, skills, languages, infoUser, projects, tools, db} =oRequest.body ;
+    const documentCreator = new DocumentCreator();
+    const doc = documentCreator.create([experiences, educations, skills, languages, infoUser, projects, tools, db]);
+    const b64string = await Packer.toBase64String(doc);
+  
     oResponse.setHeader('Content-Disposition', 'attachment; filename=My_cv.docx');
     const buff = Buffer.from(b64string, 'base64');
     return this.respond(oResponse, DONE,  buff);
@@ -58,5 +56,5 @@ export default class UserController extends Controller {
       return this.handleError(oResponse, oException);
     }
   };
- 
+
 }
