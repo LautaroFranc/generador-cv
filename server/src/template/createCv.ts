@@ -12,7 +12,6 @@ import { Project, infoUser, education, experiences, formCv } from "../interface/
 export class DocumentCreator {
   //tslint:disable-next-line:typedef
   public create([experiences, educations, skills, languages, infoUser, projects, tools, db]:any): Document {
-    console.log({infoUser});
     
     const document = new Document({
       sections: [
@@ -45,7 +44,11 @@ export class DocumentCreator {
                   arr.push(
                     this.createInstitutionHeader(
                       `${project.area} - ${project.title}`,
-                      `${project.startDate.year} - ${project.endDate.year}`
+                      this.createPositionDateText(
+                        project.startDate,
+                        project.endDate,
+                        false
+                      )
                     )
                   );
                   arr.push(
@@ -62,7 +65,7 @@ export class DocumentCreator {
                   project.link.length&&
                   arr.push(
                     new Paragraph(
-                      `Repositorio: ${project.link}`
+                      `link: ${project.link}`
                     )
                   );
                   return arr;
@@ -77,10 +80,9 @@ export class DocumentCreator {
               .map(
                 (experience: experiences) => {
                   const arr: Paragraph[] = [];
-
                   arr.push(
                     this.createInstitutionHeader(
-                      experience.company,
+                      experience.title,
                       this.createPositionDateText(
                         experience.startDate,
                         experience.endDate,
@@ -88,8 +90,7 @@ export class DocumentCreator {
                       )
                     )
                   );
-                  arr.push(this.createRoleText(experience.title));
-
+                  arr.push(this.createRoleText(experience.company));
                   experience.achievement?.forEach((bulletPoint) => {
                     arr.push(this.createBullet(bulletPoint));
                   });
@@ -220,7 +221,7 @@ export class DocumentCreator {
     return new Paragraph({
       children: [
         new TextRun({
-          text: roleText
+          text:"\t"+roleText
         }),
       ],
     });
@@ -245,9 +246,7 @@ export class DocumentCreator {
   }
 
 
-  public splitParagraphIntoBullets(text: string): string[] {
-    console.log(text);
-    
+  public splitParagraphIntoBullets(text: string): string[] {  
     return text.split("\n\n");
   }
 
