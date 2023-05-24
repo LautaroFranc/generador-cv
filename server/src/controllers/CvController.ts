@@ -14,13 +14,6 @@ export default class UserController extends Controller {
     super();
   }
 
-  /**
-   * Función de login, se toman los datos del usuario, se comprueba que los mismos sean correctos y se genera una nueva api token.
-   *
-   * @param {Request} oRequest Request de la peticion, aqui se reciben las credenciales del usuario
-   * @param {Response} oResponse Este objeto maneja el response de la solicitud
-   *
-   */
 
   generatorAbout = async (oRequest: Request, oResponse: Response) => {
     const data: any = oRequest.body;
@@ -70,11 +63,10 @@ export default class UserController extends Controller {
       const buff = Buffer.from(b64string, "base64");
       let result;
       if (_id) {
-        result = cvs.findByIdAndUpdate(
-          _id,
-          { bufferData: buff },
-          { new: true }
-        );
+        result =await cvs.updateOne( 
+          {_id},
+          { $set: { "bufferData" : buff } } 
+       );
       } else {
         const respond = new cvs({ bufferData: buff });
         result = await respond.save();
