@@ -1,6 +1,4 @@
-import React from "react";
 import GeneratorCv from "./page/GeneratorCv";
-
 
 function App() {
   return (
