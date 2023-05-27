@@ -21,13 +21,9 @@ export default class UserController extends Controller {
       const iAbout = await (data?.about &&
         iABardPrompt(data.prompt, data.about));
 
-      let text = iAbout.split("\n");
-      text.shift();
-      text = text.join("").split(">").join("").split('"""').join("");
-
       return this.respond(oResponse, DONE, {
         message: "success",
-        data: text,
+        data: iAbout,
       } as any);
     } catch (oException) {
       console.log(oException);
