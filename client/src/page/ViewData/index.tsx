@@ -7,7 +7,7 @@ import useFetchRequest from "../../hooks/useFetch";
 const FormDataDisplay = (data: formCv) => {
   const [id, setId] = useState("");
   const { request, messageError, response } = useFetchRequest("https://generador-cv.vercel.app/generateCv", "post");
-  const { request:requestIA, messageError:messageErrorIA, response:responseIA } = useFetchRequest("https://generador-cv.vercel.app/generatorAbout", "post");
+  const { request:requestIA, response:responseIA } = useFetchRequest("https://generador-cv.vercel.app/generatorAbout", "post");
   
   const [dataIA,setDataIA]=useState({
     wordKey:[],
