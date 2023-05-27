@@ -1,9 +1,10 @@
+import { API_KEY } from "../constants/Environment";
 
 const iABard =async (prompt:string) => {
   const importDynamic = new Function("modulePath", "return import(modulePath)");
   const { Bard } = await importDynamic("googlebard");
   const bot = new Bard(
-    "__Secure-1PSID=WgiBsYGW7u8CL_X8Z3sbyXdL42kwz0M0jA35kZu5FJL-O8eOt9uK688Caft4R6OcT9FxtA."
+    API_KEY
   );
 
   
