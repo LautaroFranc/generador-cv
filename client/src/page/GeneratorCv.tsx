@@ -66,8 +66,10 @@ const GeneratorCv = () => {
   useEffect(()=>{
     const dataLocal = localStorage.getItem("data_Cv");
     const dataCv:formCv = dataLocal && JSON.parse(dataLocal);
+
+    if (!dataCv) return
     setFormData(dataCv)
-    setContact(dataCv.infoUser)
+    setContact(dataCv?.infoUser)
   },[])
 
   useEffect(() =>{
@@ -226,37 +228,37 @@ const GeneratorCv = () => {
     event.preventDefault();
     localStorage.setItem("data_Cv", JSON.stringify(formData));
   };
-  
+
   return (
     <ViewContainer>
       <Form onSubmit={handleSubmit}>
         <div>
           <label htmlFor="name">Nombre:</label>
-          <input onChange={handleInputChange(setContact)} type="text" value={formData.infoUser.name} id="name" name="name" required />
+          <input onChange={handleInputChange(setContact)} type="text" value={formData?.infoUser.name} id="name" name="name" required />
         </div>
         <div>
           <label htmlFor="stack">Stack:</label>
-          <input onChange={handleInputChange(setContact)} type="text" id="stack" value={formData.infoUser.stack} name="stack" required />
+          <input onChange={handleInputChange(setContact)} type="text" id="stack" value={formData?.infoUser.stack} name="stack" required />
         </div>
         <div>
           <label htmlFor="address">Dirección:</label>
-          <input onChange={handleInputChange(setContact)} type="text" id="address" value={formData.infoUser.Address} name="Address" required />
+          <input onChange={handleInputChange(setContact)} type="text" id="address" value={formData?.infoUser.Address} name="Address" required />
         </div>
         <div>
           <label htmlFor="phone">Teléfono:</label>
-          <input onChange={handleInputChange(setContact)} type="tel" id="phone" value={formData.infoUser.phoneNumber} name="phoneNumber" required />
+          <input onChange={handleInputChange(setContact)} type="tel" id="phone" value={formData?.infoUser.phoneNumber} name="phoneNumber" required />
         </div>
         <div>
           <label htmlFor="email">Email:</label>
-          <input onChange={handleInputChange(setContact)} type="email" id="email" value={formData.infoUser.email} name="email" required />
+          <input onChange={handleInputChange(setContact)} type="email" id="email" value={formData?.infoUser.email} name="email" required />
         </div>
         <div>
           <label htmlFor="LinkedIn">LinkedIn:</label>
-          <input onChange={handleInputChange(setContact)} type="text" id="linkedin" value={formData.infoUser.profileUrl} name="profileUrl" required />
+          <input onChange={handleInputChange(setContact)} type="text" id="linkedin" value={formData?.infoUser.profileUrl} name="profileUrl" required />
         </div>
         <div>
           <label htmlFor="about">Sobre mí:</label>
-          <textarea onChange={handleInputChange(setContact)} id="about" name="about" value={formData.infoUser.about} required></textarea>
+          <textarea onChange={handleInputChange(setContact)} id="about" name="about" value={formData?.infoUser.about} required></textarea>
         </div>
         <div>
           <label>Proyectos:</label>

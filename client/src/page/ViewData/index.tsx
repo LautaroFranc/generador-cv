@@ -54,8 +54,8 @@ const FormDataDisplay = (data: formCv) => {
   useEffect(() => {
     const dataLocal = localStorage.getItem("idCv");
     const dataCv = dataLocal && JSON.parse(dataLocal);
-    setPreviewUrl(`https://generador-cv.vercel.app/viewCv/${dataCv.id}`);
-    setId(dataCv.id);
+    setPreviewUrl(`https://generador-cv.vercel.app/viewCv/${dataCv?.id}`);
+    setId(dataCv?.id);
   }, []);
 
   const updatePreview = () => {
