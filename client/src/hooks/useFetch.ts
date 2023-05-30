@@ -2,7 +2,7 @@ import { useState } from "react"
 import axios from "axios"
 
 const useFetchRequest = (URL_API:string, method:"post"|"get") =>{
-  const [response, setResponse] =useState<{}>()
+  const [response, setResponse] =useState<any>()
   const [messageError, setMessageError] =useState()
 
     const request =async (data:object) =>{
