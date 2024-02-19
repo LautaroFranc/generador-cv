@@ -75,7 +75,7 @@ export class DocumentCreator {
                 (prev: string | any[], curr: any) => prev.concat(curr),
                 []
               ),
-            this.createHeading("Experience"),
+            this.createHeading("Experiencia"),
             ...experiences
               .map(
                 (experience: experiences) => {
